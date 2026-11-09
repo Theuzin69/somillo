@@ -1,0 +1,160 @@
+/* Estilo do PDF da especificação do Somillo. Paleta: pedra escura + âmbar (luz de tocha na caverna). */
+
+@page { size: A4; }
+* { box-sizing: border-box; }
+html { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+body {
+  margin: 0;
+  font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 10pt;
+  line-height: 1.5;
+  color: #1c1917;
+}
+
+/* ---------- capa ---------- */
+.capa {
+  height: 258mm;
+  border-radius: 10px;
+  background: radial-gradient(ellipse at 28% 22%, #4a3116 0%, #1c1917 55%, #0c0a09 100%);
+  color: #fafaf9;
+  padding: 22mm 18mm 16mm;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  break-after: page;
+}
+.capa-topo { text-transform: uppercase; letter-spacing: 0.28em; font-size: 9pt; color: #fbbf24; }
+.capa-nome { font-size: 68pt; font-weight: 700; letter-spacing: -0.02em; line-height: 1; color: #fef3c7; }
+.capa-complemento { font-size: 20pt; margin-top: 5mm; color: #fde68a; }
+.capa-complemento span { color: #a8a29e; font-size: 14pt; }
+.capa-linha { width: 40mm; height: 3px; background: #f59e0b; margin: 10mm 0 6mm; }
+.capa-campanha { font-size: 12pt; color: #e7e5e4; }
+.capa-campanha b { color: #fef3c7; }
+.capa-rodape {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 6mm;
+  font-size: 9.5pt;
+  color: #e7e5e4;
+  border-top: 1px solid #44403c;
+  padding-top: 5mm;
+}
+.capa-rodape b {
+  display: block;
+  color: #fbbf24;
+  font-weight: 600;
+  font-size: 7pt;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  margin-bottom: 1mm;
+}
+
+/* ---------- sumário ---------- */
+.sumario { break-after: page; }
+.sumario h1 { break-before: avoid; }
+.sumario ul { list-style: none; padding: 0; margin: 0; }
+.sumario li { padding: 0; margin: 0; line-height: 1.42; }
+.sumario li.n1 { font-weight: 700; margin-top: 7px; font-size: 11pt; color: #78350f; }
+.sumario li.n2 { padding-left: 14px; }
+.sumario li.n3 { padding-left: 30px; font-size: 9pt; color: #57534e; }
+.sumario a { color: inherit; }
+
+/* ---------- títulos ---------- */
+h1 {
+  break-before: page;
+  font-size: 24pt;
+  line-height: 1.2;
+  color: #78350f;
+  margin: 0 0 12px;
+  padding-bottom: 6px;
+  border-bottom: 3px solid #d97706;
+}
+h2 { font-size: 15pt; line-height: 1.25; color: #1c1917; margin: 22px 0 8px; padding-bottom: 3px; border-bottom: 1px solid #e7e5e4; }
+h3 { font-size: 12pt; color: #92400e; margin: 18px 0 6px; }
+h4 { font-size: 10.5pt; margin: 14px 0 4px; }
+h1, h2, h3, h4 { break-after: avoid; }
+
+/* cada seção principal e cada tela começam numa página nova… */
+.doc-principal > h2,
+section.doc:not(.doc-principal) > h2:first-child { break-before: page; margin-top: 0; }
+/* …exceto logo depois do título da parte */
+.doc-principal > h2:first-of-type,
+h1 + section.doc:not(.doc-principal) > h2:first-child { break-before: avoid; margin-top: 14px; }
+
+/* ---------- texto ---------- */
+p { margin: 0 0 8px; orphans: 3; widows: 3; }
+ul, ol { margin: 0 0 8px; padding-left: 20px; }
+li { margin: 2px 0; }
+li:has(> input[type="checkbox"]) { list-style: none; margin-left: -18px; }
+input[type="checkbox"] { margin: 0 6px 0 0; vertical-align: -1px; }
+a { color: #b45309; text-decoration: none; }
+strong { font-weight: 650; }
+del { color: #78716c; }
+img { max-width: 100%; }
+hr { border: none; border-top: 1px solid #e7e5e4; margin: 16px 0; }
+
+/* ---------- tabelas ---------- */
+table { border-collapse: collapse; width: 100%; margin: 8px 0 12px; font-size: 8.8pt; line-height: 1.4; }
+thead { display: table-header-group; }
+th { background: #f5f5f4; text-align: left; font-weight: 650; color: #44403c; }
+th, td { border: 1px solid #e7e5e4; padding: 4px 6px; vertical-align: top; }
+tr { break-inside: avoid; }
+
+/* ---------- código e diagramas ---------- */
+code {
+  font-family: Consolas, "SF Mono", Menlo, "DejaVu Sans Mono", monospace;
+  font-size: 0.88em;
+  background: #f5f5f4;
+  border-radius: 3px;
+  padding: 0.5px 3px;
+  color: #7c2d12;
+}
+pre {
+  background: #fafaf9;
+  border: 1px solid #e7e5e4;
+  border-radius: 6px;
+  padding: 8px 10px;
+  font-size: 8pt;
+  line-height: 1.35;
+  white-space: pre-wrap;
+  break-inside: avoid;
+  margin: 8px 0 12px;
+}
+pre code { background: none; padding: 0; color: #292524; font-size: 1em; }
+/* esboços e árvores: linhas coladas para os traços de caixa se encontrarem */
+pre code.lang-text { line-height: 1.17; font-size: 1.08em; }
+pre.mermaid { background: none; border: none; text-align: center; padding: 6px 0; white-space: pre; }
+pre.mermaid svg { max-width: 100%; height: auto; }
+
+/* ---------- destaques ---------- */
+blockquote {
+  margin: 8px 0 12px;
+  padding: 6px 12px;
+  border-left: 4px solid #f59e0b;
+  background: #fffbeb;
+  color: #44403c;
+  border-radius: 0 6px 6px 0;
+  break-inside: avoid;
+}
+blockquote p:last-child { margin-bottom: 0; }
+
+/* ---------- metadados das telas e funcionalidades ---------- */
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 14px;
+  align-items: center;
+  font-size: 8.5pt;
+  color: #57534e;
+  background: #fafaf9;
+  border: 1px solid #e7e5e4;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin: 0 0 12px;
+}
+.meta b { color: #a8a29e; font-weight: 600; text-transform: uppercase; font-size: 7pt; letter-spacing: 0.08em; margin-right: 3px; }
+.status { margin-left: auto; padding: 1px 9px; border-radius: 999px; font-weight: 600; font-size: 8pt; }
+.status-rascunho { background: #fef3c7; color: #92400e; }
+.status-pronto { background: #dbeafe; color: #1e40af; }
+.status-implementado { background: #ede9fe; color: #5b21b6; }
+.status-testado { background: #dcfce7; color: #166534; }
